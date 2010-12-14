@@ -7,7 +7,7 @@ from google.appengine.ext.webapp.mail_handlers import InboundMailHandler
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.api import mail
 
-class LogSenderHandler(InboundMailHandler):
+class UrbanDaddyFoursquareHandler(InboundMailHandler):
     def receive(self, mail_message):
         logging.info('Received a message from ' + mail_message.sender)
         bodies = mail_message.bodies(content_type='text/plain')
@@ -27,7 +27,7 @@ class LogSenderHandler(InboundMailHandler):
                 tip_id = fs.addtip(vid=str(venue_id), text='from ud', type='todo')
                 
 application = webapp.WSGIApplication([
-  LogSenderHandler.mapping()
+  UrbanDaddyFoursquareHandler.mapping()
 ], debug=True)
 def main():
   run_wsgi_app(application)
